@@ -11,7 +11,7 @@
 * Set your web token crypto key into app/config.js
 * Set your admin logins/passwords into app/config.js
 * Enable Bluetooth on your MAC
-* Run `node discover` from the project directory, it will find all your SPRK+ robots and will create file sprkp.json, after some waiting stop it with Ctrl+C
+* Run `node discover` from the project directory, shake your robot to enable BLR, it will find all your SPRK+ robots and will create file sprkp.json, after some waiting stop it with Ctrl+C
 * To reset device to initial state run `node sleep`, do it every time if you can't stop robot or spheroc is unable to detect robot (after robot will shut down exit from utility by Ctrl+C)
 * Run `nodemon` to start project locally
 * Point browser to `http://127.0.0.1:3001`
