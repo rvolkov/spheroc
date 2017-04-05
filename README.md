@@ -1,5 +1,5 @@
 # SpheroC
-## Sphero SPRK+/BB8 robot controller for Node.js with web controls
+## Sphero SPRK+/BB8 robot controller with web controls (Node.js/Express.js)
 
 ## Version 0.0.1
 
