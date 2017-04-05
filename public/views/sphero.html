@@ -1,0 +1,139 @@
+<div ng-controller="MainCtrl">
+    <div class="jumbotron">
+        <div class="container">
+            <center>
+                <h3>
+                    Sphero controller
+                </h3>
+            </center>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row row-content">
+            <div class="col-xs-12">
+                <button type="button" class="btn btn-link" ng-click="logout()">
+                  <span class="glyphicon glyphicon-log-out" area-hidden="true"></span> Log Out
+                </button>
+                <button type="button" class="btn btn-info" ng-click="getS()">update</button>
+                <button type="button" class="btn btn-success" ng-show="!noserver">
+                    Server {{apiroot}} is ok
+                </button>
+                <button type="button" class="btn btn-danger" ng-show="noserver">
+                    Server {{apiroot}} is not available, wait for any response
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div class="row row-content">
+            <div ng-repeat="bc in info" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Sphero <strong>{{bc.name}}</strong> <small>{{bc.uuid}}</small> {{bc.stat}}</h2>
+                    </div>
+                    <div class="panel panel-info">
+                      <div class="panel-heading">
+                        <h4>Color control</h4>
+                      </div>
+                      <div class="panel panel-info">
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-warning" ng-click="color('green',bc.uuid)"> Green </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('red',bc.uuid)"> Red </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('blue',bc.uuid)"> Blue </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('yellow',bc.uuid)"> Yellow </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('white',bc.uuid)"> White </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('violet',bc.uuid)"> Violet </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('salmon',bc.uuid)"> Salmon </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('purple',bc.uuid)"> Purple </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('plum',bc.uuid)"> Plum </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('pink',bc.uuid)"> Pink </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('orange',bc.uuid)"> Orange </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('gold',bc.uuid)"> Gold </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('cyan',bc.uuid)"> Cyan </button>
+                          <button type="button" class="btn btn-warning" ng-click="color('aqua',bc.uuid)"> Aqua </button>
+                          <button type="button" class="btn btn-normal" ng-click="start_random(bc.uuid)"> Start RandomColor </button>
+                          <button type="button" class="btn btn-normal" ng-click="stop_random(bc.uuid)"> Stop RandomColor </button>
+                        </div>
+                      </div>
+                      <div class="panel-heading">
+                        <h4>Move control</h4>
+                      </div>
+                      <div class="panel panel-info">
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-success" ng-click="move(100, 0, bc.uuid)"> Move100 forward </button>
+                          <button type="button" class="btn btn-success" ng-click="move(100, 180, bc.uuid)"> Move100 back </button>
+                          <button type="button" class="btn btn-success" ng-click="move(100, 270, bc.uuid)"> Move100 left </button>
+                          <button type="button" class="btn btn-success" ng-click="move(100, 90, bc.uuid)"> Move100 right </button>
+                          <button type="button" class="btn btn-normal" ng-click="start_random_move(bc.uuid)"> Start random move </button>
+                          <button type="button" class="btn btn-normal" ng-click="stop_random_move(bc.uuid)"> Stop random move </button>
+                        </div>
+                      </div>
+                      <div class="panel-heading">
+                        <h4>Sensors</h4>
+                      </div>
+                      <div class="panel panel-info">
+                        <div class="panel-heading">
+                          Collision: {{bc.collision}}
+                        </div>
+                        <div class="panel panel-info">
+                          <button type="button" class="btn btn-normal" ng-click="detect_collisions(bc.uuid)"> Enable collision detect </button>
+                          <button type="button" class="btn btn-normal" ng-click="undetect_collisions(bc.uuid)"> Disable collision detect </button>
+                        </div>
+                        <div class="panel-heading">
+                          Velocity: {{bc.velocity}}
+                        </div>
+                        <div class="panel panel-info">
+                          <button type="button" class="btn btn-normal" ng-click="detect_velocity(bc.uuid)"> Enable velocity </button>
+                          <button type="button" class="btn btn-normal" ng-click="undetect_velocity(bc.uuid)"> Disable velocity </button>
+                        </div>
+                        <div class="panel-heading">
+                          Odometer: {{bc.odometer}}
+                        </div>
+                        <div class="panel panel-info">
+                          <button type="button" class="btn btn-normal" ng-click="detect_odometer(bc.uuid)"> Enable odometer </button>
+                          <button type="button" class="btn btn-normal" ng-click="undetect_odometer(bc.uuid)"> Disable odometer </button>
+                        </div>
+                        <div class="panel-heading">
+                          Angles: {{bc.angles}}
+                        </div>
+                        <div class="panel panel-info">
+                          <button type="button" class="btn btn-normal" ng-click="detect_angles(bc.uuid)"> Enable angles </button>
+                          <button type="button" class="btn btn-normal" ng-click="undetect_angles(bc.uuid)"> Disable angles </button>
+                        </div>
+                        <div class="panel-heading">
+                          Accelerometer: {{bc.accelerometer}}
+                        </div>
+                        <div class="panel panel-info">
+                          <button type="button" class="btn btn-normal" ng-click="detect_accelerometer(bc.uuid)"> Enable accelerometer </button>
+                          <button type="button" class="btn btn-normal" ng-click="undetect_accelerometer(bc.uuid)"> Disable accelerometer </button>
+                        </div>
+                        <div class="panel-heading">
+                          Accelone: {{bc.accelone}}
+                        </div>
+                        <div class="panel panel-info">
+                          <button type="button" class="btn btn-normal" ng-click="detect_accelone(bc.uuid)"> Enable accelone </button>
+                          <button type="button" class="btn btn-normal" ng-click="undetect_accelone(bc.uuid)"> Disable accelone </button>
+                        </div>
+                      </div>
+                      <div class="panel-heading">
+                          <button type="button" class="btn btn-warning" ng-click="getpower(bc.uuid)"> Get Power </button>
+                      </div>
+                      <div class="panel panel-info">
+                          recVer: {{bc.power.recVer}}<br>
+                          batteryState: {{bc.power.batteryState}}<br>
+                          batteryVoltage: {{bc.power.batteryVoltage}}<br>
+                          chargeCount: {{bc.power.chargeCount}}<br>
+                          timeSinceCharge: {{bc.power.timeSinceCharge}} minutes
+                      </div>
+                      <button type="button" class="btn btn-danger" ng-click="sleep(bc.uuid)"> Shutdown Sphero, server restart needed to return it back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+      <footer>
+          <p>API: {{apiroot}} &middot; Error: <strong>{{error}}</strong></p>
+      </footer>
+    </div>
+</div><!-- ngController -->
