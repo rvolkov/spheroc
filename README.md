@@ -1,11 +1,13 @@
 # SpheroC
-## Sphero SPRK+/BB8 robot controller for MAC OSX and Node.js and web controls
+## Sphero SPRK+/BB8 robot controller for Node.js with web controls
 
 ## Version 0.0.1
 
-### Old Sphero/SPRK doesn't supported, only BLR models
+### Old Sphero/SPRK doesn't supported, only BLE models
 ### If you have Ollie, try to add name into selection into discover.js file, it should work as well
 ### it should support any number of robots (I saw somewhere that MAC supports up to 6), but I tested it only on 1 SPRK+ robot
+### I developed it on MAC OSX, but should work on any platform with Node.js and BLE (Bluetooth Low Energy)
+
 
 ### Run on MAC OSX
 * Install Node.js.
