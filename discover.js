@@ -28,7 +28,7 @@ function createconf() {
     }
   }
   data = data + ']}';
-  console.log('Create SPRK+ config file ./sprkp.json');
+  console.log('Create SPRK+/BB8 config file ./sprkp.json');
   try {
     fs.unlinkSync('sprkp.json');
   }
@@ -51,7 +51,7 @@ function stopscan() {
 }
 
 function discover() {
-  console.log('Beginning Discover (during '+SCANTIME+' seconds), try to shake your SPRK+');
+  console.log('Beginning Discover (during '+SCANTIME+' seconds), try to shake your SPRK+/BB8');
   noble.on('stateChange', function(state) {
     if (state === 'poweredOn') {
       console.log('powered on');
@@ -63,11 +63,11 @@ function discover() {
     }
   });
   noble.on('discover', function(peripheral){
-    if(_.includes(peripheral.advertisement.localName, 'SK-')) {
+    if(_.includes(peripheral.advertisement.localName, 'SK-') || _.includes(peripheral.advertisement.localName, 'BB-')) {
       //console.log(peripheral);
       var deviceUUID = peripheral.uuid,
       localName = peripheral.advertisement.localName;
-      console.log('SPRK+ UUID - "' + deviceUUID + '" Local Name: '+localName);
+      console.log('SPRK+/BB8 UUID - "' + deviceUUID + '" Local Name: '+localName);
       var SPRKP_UUID = deviceUUID;
       var SPRKP_localName = localName;
       addSphero(SPRKP_localName, SPRKP_UUID);
