@@ -62,6 +62,15 @@ sph.getS = function() {
   return out;
 };
 
+sph.get_uuid = function(name) {
+  for(var i=0; Spheros[i]; i++) {
+    if(Spheros[i].name == name) {
+      return Spheros[i].uuid;
+    }
+  }
+  return 0;
+};
+
 sph.initSphero = function() {
   var content = fs.readFileSync("sprkp.json");
   var jsonContent = JSON.parse(content);
@@ -374,3 +383,4 @@ sph.undetect_accelone = function (uuid) {
     }
   }
 };
+module.exports = sph;

@@ -4,8 +4,9 @@ var Client = require('node-rest-client').Client;
 var sphero = require('./sphero.js');
 
 var rbox = module.exports = {};
-var rbox_server = 'server.com';
-var rbox_secret = 'cisco';
+
+var rbox_server = '127.0.0.1:3001';
+var rbox_secret = 'cscossp1';
 
 var options = {
         connection: {
@@ -39,37 +40,69 @@ var rest_call_post = function(clnt, url, arg, callback) {
 };
 
 // check RESTbox-controller
-function check_rbox() {
-  var s = sphero.getS();
+rbox.check_rbox = function(s) {
+  console.log('call for check_rbox');
   for(var i=0; s[i]; i++) {
     if(s[i].stat == 'connected') {
-      rest_call_get(Client,
-        'http://'+rbox_server+'/api/sphero/'+s[i].name+'/'+rbox_secret+'/',{},
+      console.log('request to RESTbox-controller http://'+rbox_server+'/api/sphero/'+s[i].name+'/'+rbox_secret);
+      rest_call_get(client,
+        'http://'+rbox_server+'/api/sphero/'+s[i].name+'/'+rbox_secret,{},
           function(d ,r) {
+            /*
               console.log("Received data=",d);
+              Received data= { message:
+   [ { type: 'collision', id: 0, status: 0 },
+     { type: 'led', id: 0, status: 0 },
+     { type: 'led', id: 1, status: 0 },
+     { type: 'led', id: 2, status: 0 },
+     { type: 'move', id: 0, status: 0 },
+     { type: 'move', id: 1, status: 0 } ] }
+            */
               // here we need to parse it and initiate color change or move
+              var res = d;
+              for(var i = 0; res[i]; i++) {
+                if(d.type == 'led') {
+                  if(d.id == 0 && d.status == 1) { // green
+                    sphero.color('green', s[i].uuid);
+                  }
+                  if(d.id == 1 && d.status == 1) { // red
+                    sphero.color('red', s[i].uuid);
+                  }
+                  if(d.id == 2 && d.status == 1) { // blue
+                    sphero.color('blue', s[i].uuid);
+                  }
+                }
+                if(d.type == 'move') {
+                  if(d.id == 0 && d.status == 1) { // forward 10
+                    sphero.move(100, 0, s[i].uuid);
+                  }
+                  if(d.id == 1 && d.status == 1) { // back 10
+                    sphero.move(100, 180, s[i].uuid);
+                  }
+                }
+              }
           }
       );
     }
   }
-}
-rbox.runChecks = function() {
-  setInterval(check_rbox, 2000); //call every 2 seconds
 };
 
 rbox.reportCollision = function(name) {
-  rest_call_post(Client,
+  console.log('request to RESTbox-controller http://'+rbox_server+'/api/sphero/'+name+'/'+rbox_secret+'/collision');
+  rest_call_post(client,
     'http://'+rbox_server+'/api/sphero/'+name+'/'+rbox_secret+'/collision',{},
       function(d ,r) {
-          console.log("Received data=",d);
+          console.log("CollsiON received data=",d);
       }
   );
 };
 rbox.removeCollision = function(name) {
-  rest_call_post(Client,
+  console.log('request to RESTbox-controller http://'+rbox_server+'/api/sphero/'+name+'/'+rbox_secret+'/collisioff');
+  rest_call_post(client,
     'http://'+rbox_server+'/api/sphero/'+name+'/'+rbox_secret+'/collisioff',{},
       function(d ,r) {
-          console.log("Received data=",d);
+          console.log("CollisiOFF received data=",d);
       }
   );
 };
+module.exports = rbox;

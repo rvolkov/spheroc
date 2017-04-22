@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var app = require('./app/app');
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3002);
 var server = app.listen(app.get('port'),
   function() {
     console.log('SPRK+ controller is listening on port ' + server.address().port);
