@@ -3,6 +3,7 @@ var noble = require('noble'),
 var sphero = require("sphero");
 var cfg = require('./config.js');
 var fs = require("fs");
+var rbox = require('./rbox.js');
 
 var sph = module.exports = {};
 
@@ -216,10 +217,10 @@ sph.detect_collisions = function (uuid) {
         console.log("collision detected");
         console.log("  data:", data);
         Spheros[i].collision = 'detected';
-        //Spheros[i].sphero.color("red");
+        rbox.reportCollision(Spheros[i].name);
         setTimeout(function() {
-          //Spheros[i].sphero.color("green");
           Spheros[i].collision = 'no';
+          rbox.removeCollision(Spheros[i].name);
         }, 5000);
       });
       return;
@@ -231,6 +232,7 @@ sph.undetect_collisions = function (uuid) {
   for(var i = 0; Spheros[i]; i++) {
     if(Spheros[i].uuid == uuid && Spheros[i].colldetect == 'yes') {
       Spheros[i].colldetect = 'no';
+      rbox.removeCollision(Spheros[i].name);
       console.log("remove collision");
       Spheros[i].sphero.removeListener("collision");
       return;

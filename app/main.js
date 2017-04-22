@@ -15,9 +15,10 @@ app.use(bodyParser.json());
 app.use('/webapi', expressJwt({secret: cfg.jwtsecret}));
 app.use('/v1', expressJwt({secret: cfg.jwtsecret}));
 var sphero = require('./sphero.js');
-
+var rbox = require('./rbox.js');
 var calls = require('./calls.js');
 
+rbox.runChecks();
 sphero.initSphero();
 sphero.connect();
 
