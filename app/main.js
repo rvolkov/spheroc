@@ -22,11 +22,10 @@ var calls = require('./calls.js');
 
 // check RESTbox-controller
 function check_rbox() {
-  var s = sphero.getS();
+  var s = sphero.getSpheros();
   rbox.check_rbox(s);
 }
 setInterval(check_rbox, 2000); //call every 2 seconds
-
 
 sphero.initSphero();
 sphero.connect();

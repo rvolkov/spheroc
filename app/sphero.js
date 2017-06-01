@@ -1,12 +1,10 @@
 var noble = require('noble'),
     _ = require('lodash');
 var sphero = require("sphero");
-var cfg = require('./config.js');
+//var cfg = require('./config.js');
 var fs = require("fs");
 var rbox = require('./rbox.js');
-
 var sph = module.exports = {};
-
 var Spheros = [];
 
 sph.addSphero = function(name, uuid, s, statu) {
@@ -30,7 +28,7 @@ sph.addSphero = function(name, uuid, s, statu) {
     accelerometer: '',
     accelerometerdetect: 'no',
     accelone: '',
-    accelonedetect: 'no',
+    accelonedetect: 'no'
   };
   Spheros.push(t);
 };
@@ -81,7 +79,6 @@ sph.initSphero = function() {
     sph.addSphero(t.name, t.uuid, undefined, 'detected');
   }
 };
-
 sph.connect = function() {
   console.log('point1');
   for(var i = 0; Spheros[i]; i++) {
@@ -95,7 +92,6 @@ sph.connect = function() {
     }
   }
 };
-
 sph.start_randomColor = function (uuid) {
   for(var i = 0; Spheros[i]; i++) {
     if(Spheros[i].uuid == uuid && Spheros[i].randomColor_interval_id == '') {
@@ -140,7 +136,7 @@ sph.stop_randomMove = function (uuid) {
   }
 };
 
-sph.color = function (c, uuid) {
+sph.setcolor = function (c, uuid) {
   for(var i = 0; Spheros[i]; i++) {
     if(Spheros[i].uuid == uuid) {
       Spheros[i].color = c;
@@ -230,7 +226,7 @@ sph.detect_collisions = function (uuid) {
         setTimeout(function() {
           Spheros[i].collision = 'no';
           rbox.removeCollision(Spheros[i].name);
-        }, 5000);
+        }, 10000);
       });
       return;
     }
@@ -302,7 +298,6 @@ sph.undetect_odometer = function (uuid) {
     }
   }
 };
-
 sph.detect_angles = function (uuid) {
   for(var i = 0; Spheros[i]; i++) {
     if(Spheros[i].uuid == uuid && Spheros[i].anglesdetect == 'no') {
@@ -329,7 +324,6 @@ sph.undetect_angles = function (uuid) {
     }
   }
 };
-
 sph.detect_accelerometer = function (uuid) {
   for(var i = 0; Spheros[i]; i++) {
     if(Spheros[i].uuid == uuid && Spheros[i].accelerometerdetect == 'no') {
@@ -356,7 +350,6 @@ sph.undetect_accelerometer = function (uuid) {
     }
   }
 };
-
 sph.detect_accelone = function (uuid) {
   for(var i = 0; Spheros[i]; i++) {
     if(Spheros[i].uuid == uuid && Spheros[i].accelonedetect == 'no') {

@@ -50,7 +50,7 @@ exports.apicalls = function(app) {
         var c = req.params.c;
         var uuid = req.params.uuid;
         console.log('* call for /webapi/color/'+c+'/'+uuid);
-        sphero.color(c,uuid);
+        sphero.setcolor(c,uuid);
         res.status(200).json({message: 'OK'});
     });
     // set sleep
