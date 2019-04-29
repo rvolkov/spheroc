@@ -3,9 +3,9 @@
 var Client = require('node-rest-client').Client;
 var rbox = module.exports = {};
 
-//var rbox_server = '127.0.0.1:3001';
-var rbox_server = 'ltrcrt2225.herokuapp.com';
-var rbox_secret = 'cscossp1';
+var rbox_server = '127.0.0.1:3001';
+var rbox_secret = 'cisco';
+
 
 var options = {
         connection: {
