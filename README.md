@@ -9,6 +9,10 @@
 ### I developed it on MAC OSX, but should work on any platform with Node.js and BLE (Bluetooth Low Energy)
 
 
+"noble": "git://github.com/jacobrosenthal/noble.git#highsierra",
+"noble": "https://github.com/Timeular/noble-mac.git",
+
+
 ### Run on MAC OSX
 * Install Node.js.
 * Clone/Pull this project from github https://github.com/rvolkov/spheroc

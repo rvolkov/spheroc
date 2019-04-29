@@ -215,16 +215,28 @@ sph.detect_collisions = function (uuid) {
         yt: 0x10,
         xs: 0x10,
         ys: 0x10,
-        dead: 0x20
+        dead: 0x01
+//        meth: 0x01,
+//        xt: 0x10,
+//        yt: 0x10,
+//        xs: 0x10,
+//        ys: 0x10,
+//        dead: 0x20
       });
       Spheros[i].sphero.on("collision", function(data) {
         //Spheros[i].sphero.stop();
         console.log("collision detected");
         console.log("  data:", data);
         Spheros[i].collision = 'detected';
+        Spheros[i].color = 'red';
+        Spheros[i].sphero.color('red', function(err, data) {
+        });
         rbox.reportCollision(Spheros[i].name);
         setTimeout(function() {
           Spheros[i].collision = 'no';
+          Spheros[i].color = 'green';
+          Spheros[i].sphero.color('green', function(err, data) {
+          });
           rbox.removeCollision(Spheros[i].name);
         }, 10000);
       });

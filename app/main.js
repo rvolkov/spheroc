@@ -25,7 +25,7 @@ function check_rbox() {
   var s = sphero.getSpheros();
   rbox.check_rbox(s);
 }
-setInterval(check_rbox, 2000); //call every 2 seconds
+setInterval(check_rbox, 1000); //call every 1 second
 
 sphero.initSphero();
 sphero.connect();
@@ -42,7 +42,7 @@ function ping_sphero() {
     }
   }
 };
-setInterval(ping_sphero, 5000); //call every 5 seconds
+setInterval(ping_sphero, 20000); //call every 20 seconds
 
 calls.apicalls(app);
 app.all('*',

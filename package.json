@@ -6,27 +6,35 @@
   "scripts": {
     "start": "node ./www",
     "test": "mocha",
-    "postinstall": "bower cache clean && bower update --force-latest"
+    "postinstall": ""
   },
   "dependencies": {
-    "express": "4.15.2",
-    "body-parser": "1.17.1",
-    "bower": "1.8.0",
-    "cors": "2.8.1",
-    "jsonwebtoken": "7.3.0",
-    "express-jwt": "5.1.0",
-    "node-rest-client": "3.0.7",
-    "btoa": "1.1.2",
-    "sphero": "*",
-    "noble": "1.7.0"
+    "body-parser": "^1.18.3",
+    "bower": "*",
+    "btoa": "*",
+    "cors": "*",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "*",
+    "lodash": "^4.17.11",
+    "nan": "^2.13.2",
+    "noble": "https://github.com/Timeular/noble-mac.git",
+    "node-gyp": "^3.8.0",
+    "node-rest-client": "^3.1.0",
+    "nodemon": "^1.18.11",
+    "sphero": "^0.9.2",
+    "xpc-connection": "sandeepmistry/node-xpc-connection#pull/26/head"
+  },
+  "resolutions": {
+    "xpc-connection": "sandeepmistry/node-xpc-connection#pull/26/head"
   },
   "engines": {
-    "node": "6.2.0",
-    "npm": "3.8.9"
+    "node": "*",
+    "npm": "*"
   },
   "devDependencies": {
-      "hippie": "0.5.1",
-      "supertest": "3.0.0",
-      "mocha": "3.2.0"
+    "hippie": "^0.5.2",
+    "mocha": "*",
+    "supertest": "*"
   }
 }

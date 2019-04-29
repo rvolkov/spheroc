@@ -51,12 +51,19 @@ function stopscan() {
 }
 
 function discover() {
+  //console.log('first try');
+  //noble.startScanning([], true); // any service UUID, allow duplicates
+  //var serviceUUIDs = []; // default: [] => all
+  //var allowDuplicates = true; // default: false
+  //noble.startScanning(serviceUUIDs, allowDuplicates); // particular UUID's
+
   console.log('Beginning Discover (during '+SCANTIME+' seconds), try to shake your SPRK+/BB8');
   noble.on('stateChange', function(state) {
     if (state === 'poweredOn') {
       console.log('powered on');
       setTimeout(stopscan, SCANTIME * 1000);
-      noble.startScanning();
+      //noble.startScanning();
+      noble.startScanning([], true);
     } else {
       console.log('is is not powered on');
       noble.stopScanning();

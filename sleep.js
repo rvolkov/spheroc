@@ -1,3 +1,4 @@
+'use strict';
 var noble = require('noble'),
     _ = require('lodash');
 var sphero = require("sphero");
